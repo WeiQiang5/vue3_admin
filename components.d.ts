@@ -15,5 +15,6 @@ declare module 'vue' {
     IEpShare: typeof import('~icons/ep/share')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    SvgIcon: typeof import('./src/components/SvgIcon/index.vue')['default']
   }
 }
