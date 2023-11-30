@@ -16,17 +16,17 @@
 
     /* Linting */
     "strict": true,
+    // 去除为引入的报错
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
 
-    // 设置路径提示
-    "baseUrl": "./",
+    // 设置路径别名
+    "baseUrl": ".",
     "paths": {
-      "@/*":["src/*"]
+      "@/*": ["src/*"]
     }
   },
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue","./auto-imports.d.ts"],
-  // "references": [{ "path": "./tsconfig.node.json" }]
-
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
+  "references": [{ "path": "./tsconfig.node.json" }]
 }

@@ -12,7 +12,6 @@ module.exports = {
     "plugin:vue/vue3-essential",
     "prettier",
     "plugin:prettier/recommended",
-    "./.eslintrc-auto-import.json",
   ],
   overrides: [
     {

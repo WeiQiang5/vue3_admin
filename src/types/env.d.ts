@@ -1,7 +1,6 @@
-declare module "element-plus/dist/locale/zh-cn.mjs";
-declare module "element-plus/dist/locale/en.mjs";
-declare module "element-plus";
+// env.d.ts中
 
+// export declare type FormInstance = InstanceType<typeof Form>;
 interface ImportMetaEnv {
   VITE_BASE_API: string;
 }
