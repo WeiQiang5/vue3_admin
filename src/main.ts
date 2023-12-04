@@ -5,6 +5,7 @@ import router from "@/router/index.ts";
 import store from "./store";
 import ElementPlus from "element-plus";
 import "element-plus/dist/index.css";
+import "./pemission";
 
 const app = createApp(App);
 

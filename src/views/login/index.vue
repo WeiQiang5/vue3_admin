@@ -42,8 +42,9 @@
 import { ref } from "vue";
 import { validatePassword } from "./rules";
 import { LoginParams } from "@/interface/login";
-// import useUserStore from "@/store/modules/user";
+import useUserStore from "@/store/modules/user";
 import { FormInstance, FormRules } from "element-plus";
+import { useRouter } from "vue-router";
 
 // 登录参数
 const loginForm = ref<LoginParams>({
@@ -76,12 +77,27 @@ const loginRules = ref<FormRules>({
  * 3.修改属性store.$patch(attr) 批量修改store.$patch(state=>{})
  * 4.重置state store.$reset()
  */
-// const store = useUserStore();
+const store = useUserStore();
+const router = useRouter();
 const loginFormRef = ref<FormInstance>();
 // 登录
 const clickLogin = () => {
   // 1.进行表单校验
-  loginFormRef.value?.validate();
+  loginFormRef.value?.validate(async (valid: boolean) => {
+    if (!valid) return;
+    loading.value = true;
+    try {
+      const { username, password } = loginForm.value;
+      const res = await store.login({ username, password });
+      store.token = res.data.token;
+      loading.value = false;
+      // 跳转
+      router.push("/");
+      console.log(res);
+    } catch (e) {
+      loading.value = false;
+    }
+  });
   // 2.触发登录动作
   // 3.进行登录后处理
 };

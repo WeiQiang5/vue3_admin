@@ -7,6 +7,7 @@ import axios, {
   AxiosRequestConfig,
 } from "axios";
 import qs from "qs";
+import useUserStore from "@/store/modules/user";
 
 export class Request {
   // axios实例
@@ -15,7 +16,7 @@ export class Request {
   private baseConfig: httpRequestConfig = {
     headers: {
       "X-Requested-With": "XMLHttpRequest",
-      "Content-Type": "application/json; charset=UTF-8",
+      // "Content-Type": "application/json; charset=UTF-8",
       icode: "E1B29D5AD691523C",
     },
     baseURL: import.meta.env.VITE_BASE_API,
@@ -55,6 +56,7 @@ export class Request {
     );
     this.instance.interceptors.response.use(
       (response: AxiosResponse) => {
+        response.headers.Authorization = "Bearer " + useUserStore().token;
         return response.data;
       },
       (error: AxiosError) => {
@@ -120,7 +122,7 @@ export class Request {
   request(config: AxiosRequestConfig): Promise<AxiosResponse> {
     return this.instance.request(config);
   }
-  get<T = unknown>(config?: AxiosRequestConfig): Promise<AxiosResponse<T>> {
+  get<T = unknown>(config?: AxiosRequestConfig): Promise<ApiResponse<T>> {
     return this.instance.get(config?.url as string, config);
   }
   public post<T = unknown>(
