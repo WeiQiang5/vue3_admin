@@ -10,6 +10,7 @@
     "commit": "git add . && git-cz"
   },
   "dependencies": {
+    "@element-plus/icons-vue": "^2.3.1",
     "@types/md5": "^2.3.5",
     "@types/tailwindcss": "^3.1.0",
     "axios": "^1.6.2",
@@ -48,6 +49,7 @@
     "tailwindcss": "^3.3.5",
     "typescript": "^5.3.2",
     "vite": "^5.0.0",
+    "vue-eslint-parser": "^9.3.2",
     "vue-tsc": "^1.8.22"
   },
   "lint-staged": {

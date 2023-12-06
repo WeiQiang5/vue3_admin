@@ -1,12 +1,12 @@
 import { defineStore } from "pinia";
 import { LoginParams } from "@/interface/login";
-import { login } from "@/api/login";
+import { UserInfo, getProfile, login } from "@/api/user";
 import md5 from "md5";
-import { LoginReturnValue } from "@/api/login";
+import { LoginReturnValue } from "@/api/user";
 import { ApiResponse } from "@/interface/axiosType";
 
 export interface UserState {
-  userInfo: string;
+  userInfo: UserInfo;
   token: string;
 }
 
@@ -14,25 +14,37 @@ export interface UserState {
 const useUserStore = defineStore("user", {
   state: (): UserState => {
     return {
-      userInfo: "",
+      userInfo: {},
       token: "",
     };
   },
   getters: {
-    getUserInfo(): string {
-      return this.userInfo;
+    getToken(): string {
+      return this.token;
+    },
+    hasUserInfo(): boolean {
+      return Object.keys(this.userInfo).length > 0;
     },
   },
   actions: {
-    async login(
-      loginParams: LoginParams
-    ): Promise<ApiResponse<LoginReturnValue>> {
+    login(loginParams: LoginParams): Promise<ApiResponse<LoginReturnValue>> {
       const { username, password } = loginParams;
       return new Promise((resolve, reject) => {
         return login({
           username,
           password: md5(password),
         })
+          .then((res) => {
+            resolve(res);
+          })
+          .catch((err) => {
+            reject(err);
+          });
+      });
+    },
+    getUserInfo(): Promise<ApiResponse<UserInfo>> {
+      return new Promise((resolve, reject) => {
+        return getProfile()
           .then((res) => {
             resolve(res);
           })

@@ -13,6 +13,7 @@
 </template>
 
 <script lang="ts" setup>
+import { computed } from "vue";
 import { isExternal as external } from "@/utils/validate";
 interface SvgIconProps {
   // icon图标

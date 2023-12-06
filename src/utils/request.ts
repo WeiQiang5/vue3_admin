@@ -28,7 +28,12 @@ export class Request {
     this.instance.interceptors.request.use(
       (options: httpRequestConfig) => {
         const headers = (options.headers = options.headers || {});
+        const store = useUserStore();
+        console.log("拦截器==>", store.token);
 
+        if (store.token) {
+          headers.Authorization = `Bearer ${store.token}`;
+        }
         if (options.form) {
           headers["Content-Type"] =
             "application/x-www-form-urlencoded; charset=UTF-8";
@@ -56,7 +61,6 @@ export class Request {
     );
     this.instance.interceptors.response.use(
       (response: AxiosResponse) => {
-        response.headers.Authorization = "Bearer " + useUserStore().token;
         return response.data;
       },
       (error: AxiosError) => {
