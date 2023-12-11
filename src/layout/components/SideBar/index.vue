@@ -3,12 +3,12 @@
     <el-menu
       class="el-menu-vertical"
       :default-active="current"
-      unique-opened
       :collapse="isCollapse"
-      mode="vertical"
+      :mode="layoutStore.mode"
       background-color="#324157"
       text-color="#bfcbd9"
       active-text-color="#20a0ff"
+      :unique-opened="layoutStore.uniqueOpened"
       router
     >
       <template v-for="item in routes">
@@ -187,4 +187,3 @@ const routes = [
   min-height: 400px;
 }
 </style>
-@/store/modules/layout
