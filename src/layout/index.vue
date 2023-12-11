@@ -1,12 +1,10 @@
 <template>
   <el-container class="w-screen h-screen">
     <SideBar />
-    <Transition name="move">
-      <el-container>
-        <Header />
-        <AppMain />
-      </el-container>
-    </Transition>
+    <el-container class="main">
+      <Header />
+      <AppMain />
+    </el-container>
   </el-container>
 </template>
 
@@ -16,4 +14,9 @@ import SideBar from "./components/SideBar/index.vue";
 import AppMain from "./components/AppMain/index.vue";
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.main {
+  display: flex;
+  flex-direction: column;
+}
+</style>

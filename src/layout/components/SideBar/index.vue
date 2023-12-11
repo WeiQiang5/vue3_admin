@@ -56,7 +56,7 @@
 
 <script lang="ts" setup>
 import { computed, ref } from "vue";
-import useSideBar from "@/store/modules/sidebar";
+import useLayout from "@/store/modules/layout";
 import { Variable } from "@/constant";
 interface AsideProps {
   width: number;
@@ -67,8 +67,8 @@ const props = withDefaults(defineProps<AsideProps>(), {
 });
 
 // 导航栏收缩
-const sidebarStore = useSideBar();
-const isCollapse = computed((): boolean => sidebarStore.collapse);
+const layoutStore = useLayout();
+const isCollapse = computed((): boolean => layoutStore.collapse);
 const menuClass = computed((): string => `${props.width}px`);
 // 导航栏当前索引
 const current = ref<string>("0");
@@ -77,7 +77,7 @@ const current = ref<string>("0");
 const routes = [
   {
     icon: "Odometer",
-    index: "/dashboard",
+    index: "/home",
     title: "系统首页",
     permiss: "1",
   },
@@ -187,3 +187,4 @@ const routes = [
   min-height: 400px;
 }
 </style>
+@/store/modules/layout

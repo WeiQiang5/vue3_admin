@@ -4,7 +4,7 @@ export interface SideBarState {
   collapse: boolean;
 }
 
-const useSideBar = defineStore("sidebar", {
+const useLayout = defineStore("sidebar", {
   state: (): SideBarState => ({
     collapse: false,
   }),
@@ -15,4 +15,4 @@ const useSideBar = defineStore("sidebar", {
   },
 });
 
-export default useSideBar;
+export default useLayout;

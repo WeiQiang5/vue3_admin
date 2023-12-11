@@ -1,7 +1,5 @@
 <template>
-  <el-main class="w-full h-full">
-    <router-view></router-view>
-  </el-main>
+  <div>页面</div>
 </template>
 
 <script lang="ts" setup></script>

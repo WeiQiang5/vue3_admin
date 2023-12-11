@@ -2,9 +2,7 @@
   <el-header
     :height="customHeight"
     class="flex items-center relative border-b-2 border-slate-200 shadow-sm"
-    :style="{
-      width: 'calc(100vw - 300px)',
-    }"
+    style="width: 100%"
   >
     <!-- 折叠按钮 -->
     <div
@@ -46,11 +44,17 @@
 <script lang="ts" setup>
 import { computed } from "vue";
 import useUserStore from "@/store/modules/user";
-import useSidebar from "@/store/modules/sidebar";
+import useLayout from "@/store/modules/layout";
 // 用户状态
 const userStore = useUserStore();
 // 导航栏状态
-const sidebarStore = useSidebar();
+const layoutStore = useLayout();
+
+// 导航栏收缩
+const isCollapse = computed(() => layoutStore.collapse);
+const clickCollapse = () => {
+  layoutStore.handleCollapse();
+};
 
 interface HeaderProps {
   height: number;
@@ -60,11 +64,5 @@ const props = withDefaults(defineProps<HeaderProps>(), {
 });
 // 高度
 const customHeight = computed(() => `${props.height}px`);
-// 导航栏收缩
-const isCollapse = computed(() => sidebarStore.collapse);
-const clickCollapse = () => {
-  sidebarStore.handleCollapse();
-};
 </script>
-
 <style scoped lang="scss"></style>
