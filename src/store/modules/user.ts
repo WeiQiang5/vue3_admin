@@ -27,6 +27,7 @@ const useUserStore = defineStore("user", {
     },
   },
   actions: {
+    // 登录
     login(loginParams: LoginParams): Promise<ApiResponse<LoginReturnValue>> {
       const { username, password } = loginParams;
       return new Promise((resolve, reject) => {
@@ -42,6 +43,15 @@ const useUserStore = defineStore("user", {
           });
       });
     },
+    // 退出登录
+    logout() {
+      this.userInfo = {};
+      this.token = "";
+      localStorage.removeItem("userInfo");
+      localStorage.removeItem("token");
+      // TODO 清理权限
+    },
+    // 获取用户信息
     getUserInfo(): Promise<ApiResponse<UserInfo>> {
       return new Promise((resolve, reject) => {
         return getProfile()

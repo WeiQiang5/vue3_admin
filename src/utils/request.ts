@@ -8,6 +8,7 @@ import axios, {
 } from "axios";
 import qs from "qs";
 import useUserStore from "@/store/modules/user";
+import { ElMessage } from "element-plus";
 
 export class Request {
   // axios实例
@@ -107,7 +108,7 @@ export class Request {
               errMessage = `连接出错(${error.response.status})!`;
           }
           // 弹出提示框
-          console.log(`${errMessage},请检查网络或联系管理员`);
+          ElMessage.error(`${errMessage},请检查网络或联系管理员`);
         } else {
           console.error(
             (error.config && error.config.url) || "无url",
@@ -117,7 +118,7 @@ export class Request {
           //   ? '您与服务器的连接已经断开，请联系管理员处理'
           //   : '网络连接已断开'
           // 弹出提示框
-          console.log("您与服务器的连接已经断开，请联系管理员处理");
+          ElMessage.error("您与服务器的连接已经断开，请联系管理员处理");
         }
         return Promise.reject(error);
       }

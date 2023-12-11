@@ -33,7 +33,9 @@
             <router-link to="/"
               ><el-dropdown-item> 主页 </el-dropdown-item></router-link
             >
-            <el-dropdown-item divided> 退出登录 </el-dropdown-item>
+            <el-dropdown-item divided @click="handleLogout">
+              退出登录
+            </el-dropdown-item>
           </el-dropdown-menu>
         </template>
       </el-dropdown>
@@ -45,6 +47,8 @@
 import { computed } from "vue";
 import useUserStore from "@/store/modules/user";
 import useLayout from "@/store/modules/layout";
+import { ElMessage } from "element-plus";
+import { useRouter } from "vue-router";
 // 用户状态
 const userStore = useUserStore();
 // 导航栏状态
@@ -64,5 +68,16 @@ const props = withDefaults(defineProps<HeaderProps>(), {
 });
 // 高度
 const customHeight = computed(() => `${props.height}px`);
+
+// 退出登录
+const router = useRouter();
+const handleLogout = () => {
+  userStore.logout();
+
+  ElMessage.success("退出登录成功");
+  setTimeout(() => {
+    router.push("/login");
+  }, 500);
+};
 </script>
 <style scoped lang="scss"></style>
